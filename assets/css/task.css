@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+body{
+    padding:0;
+    margin:0;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.navbar{
+    display:flex;
+    padding:1.5rem 0;
+    border-bottom:2px solid black;
+    margin-bottom:5rem;
+}
+
+.navbar a{
+    font-size: medium;
+    font-weight: bold;
+    color:black;
+    margin-left: 6rem;
+    text-decoration: none;
+}
+
+.task_form{
+    display: flex;
+    flex-direction: column;
+    width:700px;
+    margin:0 auto 2rem auto;
+}
+
+.task_label{
+    margin-bottom: 0.5rem;
+}
+
+.task_input{
+    margin-bottom: 1rem;
+    padding:10px;
+    font-size: medium;
+    border: 1px solid black;
+}
+
+.task_description{
+    margin-bottom: 1rem;
+}
+
+.btn{
+    background:transparent;
+    color:black;
+    border:2px solid black;
+    padding:0.5rem 1rem;
+    font-size:medium;
+}
+
+.btn:hover{
+    background: black;
+    color:white;
+    transition: 4ms;
+}
+
+.details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.5rem 0;
+}
+
+.date_container input{
+    padding: 0.2rem;
+}
+
+.task{
+    display:flex;
+    flex-direction: column;
+    padding:1rem;
+    width:700px;
+    border: 1px solid black;
+    margin:0 auto 1rem auto;
+}
+
+.task_bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time{
+    display: flex;
+}
+
+.time p{
+    border:1px solid black;
+    padding:0.5rem;
+    margin-right: 1rem;
+}
+

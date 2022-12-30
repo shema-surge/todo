@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/task.css">
+    <script src="../js/task.js" defer></script>
+</head>
+
+
+<body>
+    
+<nav class="navbar">
+    <a href="">TODO</a>
+</nav>
+
+<div class="task_form">
+    <label class="task_label" for="task_name">Task name:</label>
+    <input class="task_input" type="text" name="username" id="username" placeholder="task name ...">
+    <label class="task_label" for="description">Description:</label>
+    <textarea class="task_description" name="description" id="description" cols="15" rows="10"></textarea>
+    
+    <div class="details">
+        <div class="date_container">
+            <label for="due_date">Due date:</label>
+            <input type="datetime-local" id="due_date" name="date">
+        </div>
+        <button class="btn">Add Task</button>
+    </div>
+    
+</div>
+<%
+    
+    <div class="task" id="task1">
+        <h3 class="name">Task5</h3>
+        <p class="description">Get stuff done!!</p>
+        <div class="task_bottom">
+            <div class="time">
+                <p class="due_date">12-oct-2022</p>
+                <p class="time_left">15 mins left</p>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="editTask('task1')">Edit</button>
+                <button class="btn" >Delete</button>
+                <button class="btn" >Complete</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
