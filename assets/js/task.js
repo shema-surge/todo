@@ -1,8 +1,8 @@
 
 function addTask(){
+    console.log(document.getElementById('task_due_date').value)
     let taskform = document.getElementById("task_form")
-    console.log(document.getElementById('due_date').value)
-    /*let xhttp = new XMLHttpRequest()
+    let xhttp = new XMLHttpRequest()
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             showTasks()
@@ -10,12 +10,11 @@ function addTask(){
     }
     xhttp.open("POST","http://localhost:4500/addTask",true)
     xhttp.setRequestHeader("Content-Type","application/json")
-    xhttp.send(`{"name":"${taskform.children[1].value}","description":"${taskform.children[3].value}","due_date":"${taskform.children[4].children[0].children[1].value}"}`)*/
+    xhttp.send(`{"name":"${document.getElementById('task_name').value}","description":"${document.getElementById('task_description').value}","due_date":"${document.getElementById('task_due_date').value}"}`)
 }
 
 
 function startEditingTask(id){
-    console.log("hello")
     let task = document.getElementById(id)
     let xhttp =  new XMLHttpRequest()
     xhttp.onreadystatechange = function(){
@@ -32,9 +31,10 @@ function startEditingTask(id){
             <div class="details">
                 <div class="date_container">
                     <label for="task_due_date">Due date:</label>
-                    <input type="datetime-local" id="${data._id}_task_due_date" name="date" value="${data.due_date}">
+                    <input type="datetime-local" id="${data._id}_task_due_date" name="date" value="${data.due_date.toString().slice(0,data.due_date.toString().length-1)}">
                 </div>
                 <button class="btn" onclick="editTask('${data._id}')">Edit</button>
+                <button class="btn" onclick="lTask('${data._id}')">Cancel</button>
             <div>
         
             `
@@ -47,10 +47,7 @@ function startEditingTask(id){
 }
 
 function editTask(id){
-
     let task = document.getElementById(id)
-
-
     let xhttp = new XMLHttpRequest()
     xhttp.onreadystatechange = function(){
 
@@ -80,7 +77,7 @@ function editTask(id){
 
     xhttp.open("POST",`http://localhost:4500/editTask/${id}`,true)
     xhttp.setRequestHeader("Content-Type","application/json")
-    xhttp.send(`{"name":"${document.getElementById(`${id}_task_name`).value}","description":"${document.getElementById(`${id}_task_description`).value}"}`)
+    xhttp.send(`{"name":"${document.getElementById(`${id}_task_name`).value}","description":"${document.getElementById(`${id}_task_description`).value}","due_date":"${document.getElementById(`${id}_task_due_date`).value}"}`)
 
 }
 

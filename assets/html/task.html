@@ -18,14 +18,14 @@
 
 <div class="task_form" id="task_form">
     <label class="task_label" for="task_name">Task name:</label>
-    <input class="task_input" type="text" name="username" id="username" placeholder="task name ...">
-    <label class="task_label" for="description">Description:</label>
-    <textarea class="task_description" name="description" id="description" cols="15" rows="10"></textarea>
+    <input class="task_input" type="text" name="username" id="task_name" placeholder="task name ...">
+    <label class="task_label" for="task_description">Description:</label>
+    <textarea class="task_description" name="description" id="task_description" cols="15" rows="10"></textarea>
     
     <div class="details">
         <div class="date_container">
-            <label for="due_date">Due date:</label>
-            <input type="datetime-local" id="due_date" name="date">
+            <label for="task_due_date">Due date:</label>
+            <input type="datetime-local" id="task_due_date" name="date">
         </div>
         <button class="btn" onclick="addTask()">Add Task</button>
     </div>
