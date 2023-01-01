@@ -1,7 +1,7 @@
 const task = require('./task')
 
 function getAllTasks(){
-    return task.find();
+    return task.find()
 }
 
 function getOneTask(id){
@@ -16,20 +16,16 @@ function getCompletedTasks(id){
     return task.find({status:"Completed"})
 }
 
-function addTask(name,description,due_date){
-    task.create({name,description,due_date,status:"Pending"})
+function addTask(obj){
+   return task.create(obj)
 }
 
-function editTask(id,name,description,due_date){
-    task.findByIdAndUpdate(id,{name,description,due_date})
-}
-
-function completeTask(id,name,description,due_date){
-    task.findByIdAndUpdate(id,{status:"Completed"})
+function editTask(id,obj){
+    return task.findByIdAndUpdate(id,obj,{new:true})
 }
 
 function deleteTask(id){
     task.findByIdAndDelete(id)
 }
 
-module.exports = {getAllTasks,getOneTask,editTask,completeTask,deleteTask}
+module.exports = {getAllTasks,getOneTask,addTask,editTask,deleteTask}

@@ -9,18 +9,11 @@ app.use(cors({
     origin:'*'
 }))
 
-app.set('view-engine','ejs')
-
 app.use(express.static(__dirname+'/assets'))
-
+app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
-
-app.get('/',(res,req)=>{
-    res.sendFile(__dirname+'/views/index.html')
-})
-
-//app.use('/',require('./controllers/routes'))
+app.use('/',require('./controllers/routes'))
 
 mongoose.connect(`mongodb://localhost:27017/mydb`,(err)=>{
     if(err) console.error(err)

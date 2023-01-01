@@ -16,7 +16,7 @@
     <a href="">TODO</a>
 </nav>
 
-<div class="task_form">
+<div class="task_form" id="task_form">
     <label class="task_label" for="task_name">Task name:</label>
     <input class="task_input" type="text" name="username" id="username" placeholder="task name ...">
     <label class="task_label" for="description">Description:</label>
@@ -27,27 +27,15 @@
             <label for="due_date">Due date:</label>
             <input type="datetime-local" id="due_date" name="date">
         </div>
-        <button class="btn">Add Task</button>
+        <button class="btn" onclick="addTask()">Add Task</button>
     </div>
     
 </div>
-<%
-    
-    <div class="task" id="task1">
-        <h3 class="name">Task5</h3>
-        <p class="description">Get stuff done!!</p>
-        <div class="task_bottom">
-            <div class="time">
-                <p class="due_date">12-oct-2022</p>
-                <p class="time_left">15 mins left</p>
-            </div>
-            <div class="actions">
-                <button class="btn" onclick="editTask('task1')">Edit</button>
-                <button class="btn" >Delete</button>
-                <button class="btn" >Complete</button>
-            </div>
-        </div>
-    </div>
+
+<div class="task_container">
+
+</div>    
+
 
 
 </body>
