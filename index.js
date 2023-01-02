@@ -13,7 +13,9 @@ app.use(express.static(__dirname+'/assets'))
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
-app.use('/',require('./controllers/routes'))
+app.use('/',require('./controllers/mainRoutes'))
+app.use('/',require('./controllers/userRoutes'))
+app.use('/',require('./controllers/taskRoutes'))
 
 mongoose.connect(`mongodb://localhost:27017/mydb`,(err)=>{
     if(err) console.error(err)

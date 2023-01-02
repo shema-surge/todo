@@ -4,14 +4,6 @@ const path = require('path')
 
 const router = Router()
 
-router.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/../assets/html/index.html'))
-})
-
-router.get('/task',(req,res)=>{
-    res.sendFile(path.join(__dirname,'/../assets/html/task.html'))
-})
-
 router.get('/allTasks',async (req,res,next)=>{
     try{
         res.send(await getAllTasks())
