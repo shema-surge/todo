@@ -1,5 +1,5 @@
 const {Router} = require('express')
-const {getAllTasks,getOneTask,addTask,editTask} = require('../model/taskDao')
+const {getAllTasks,getOneTask,addTask,editTask,deleteTask} = require('../model/taskDao')
 const path = require('path')
 
 const router = Router()
@@ -51,6 +51,15 @@ router.post('/addTask',async (req,res,next)=>{
         }
         res.send(await addTask(obj))
         //console.log(obj)
+    }catch(err){
+        console.error(err)
+    }
+})
+
+router.get('/delete/:id',async (req,res,next)=>{
+    try{
+        if(!req.params.id || !req.params.id) throw new Error("Missing task ID")
+        res.send(await deleteTask(req.params.id))
     }catch(err){
         console.error(err)
     }

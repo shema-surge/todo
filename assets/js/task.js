@@ -1,121 +1,144 @@
+async function addTask(){
 
-function addTask(){
-    console.log(document.getElementById('task_due_date').value)
-    let taskform = document.getElementById("task_form")
-    let xhttp = new XMLHttpRequest()
-    xhttp.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){
-            showTasks()
-        }
-    }
-    xhttp.open("POST","http://localhost:4500/addTask",true)
-    xhttp.setRequestHeader("Content-Type","application/json")
-    xhttp.send(`{"name":"${document.getElementById('task_name').value}","description":"${document.getElementById('task_description').value}","due_date":"${document.getElementById('task_due_date').value}"}`)
-}
-
-
-function startEditingTask(id){
-    let task = document.getElementById(id)
-    let xhttp =  new XMLHttpRequest()
-    xhttp.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){
-            let data = JSON.parse(this.response)
-            console.log(data)
-            task.innerHTML = `
-    
-            <label class="task_label" for="task_name">Name:</label>
-            <input class="task_input" type="text" name="name" id="${data._id}_task_name" value="${data.name}">
-            <label class="task_label" for="task_description">Description:</label>
-            <textarea class="task_description" name="description" id="${data._id}_task_description" cols="15" rows="10">${data.description}</textarea>
-            
-            <div class="details">
-                <div class="date_container">
-                    <label for="task_due_date">Due date:</label>
-                    <input type="datetime-local" id="${data._id}_task_due_date" name="date" value="${data.due_date.toString().slice(0,data.due_date.toString().length-1)}">
-                </div>
-                <button class="btn" onclick="editTask('${data._id}')">Edit</button>
-                <button class="btn" onclick="lTask('${data._id}')">Cancel</button>
-            <div>
+    let headers={"Content-Type":"application/json"}
+    let data = `{
         
-            `
-        }
-    }
+    "name":"${document.getElementById('task_name').value}",
+    "description":"${document.getElementById('task_description').value}",
+    "due_date":"${document.getElementById('task_due_date').value}"
 
-    xhttp.open("GET",`http://localhost:4500/task/${id}`,true)
-    xhttp.send()
+    }`
+
+    await ajax("POST","http://localhost:4500/addTask",headers,data)
+    showTasks()
 
 }
 
-function editTask(id){
-    let task = document.getElementById(id)
-    let xhttp = new XMLHttpRequest()
-    xhttp.onreadystatechange = function(){
+async function editMode(id){
 
-        if(this.readyState == 4 && this.status == 200){
-            let data = JSON.parse(this.response)
+    document.getElementById(`${id}_task`).hidden = true;
+    let task = await ajax("GET",`http://localhost:4500/task/${id}`,null,null)
+    document.getElementById(id).innerHTML+=displayTaskForm(task)
 
-            task.innerHTML = `
+}
+
+async function edit(id){
+    let headers={"Content-Type":"application/json"}
+    let data = `{
+        
+    "name":"${document.getElementById(`${id}_task_name`).value}",
+    "description":"${document.getElementById(`${id}_task_description`).value}",
+    "due_date":"${document.getElementById(`${id}_task_due_date`).value}"
+
+    }`
+
+    let updatedTask = await ajax("POST",`http://localhost:4500/editTask/${id}`,headers,data)
+    if(updatedTask) document.getElementById(id).innerHTML = displayTask(updatedTask)
+}
+
+async function complete(id){
+    let task = await ajax("POST",`http://localhost:4500/editTask/${id}`,{"Content-Type":"application/json"},'{"status":"Completed"}')
+    document.getElementById(id).innerHTML=displayTask(task)
+}
+
+async function deleteTask(id){
+
+    await ajax("GET",`http://localhost:4500/delete/${id}`,null,null)
+    document.getElementById(id).remove()
+
+}
+
+function cancelEdit(id){
+    document.getElementById(`${id}_task`).hidden = false;
+    document.getElementById(`${id}_task_form`).remove();
+}
+
+
+
+function displayTask(task){
+    return `
     
-            <h3 class="name">${data.name}</h3>
-            <p class="description">${data.description}</p>
-            <div class="task_bottom">
-                <div class="time">
-                    <p class="due_date">${data.due_date}</p>
-                    <p class="time_left">15 mins left</p>
-                </div>
-                <div class="actions">
-                    <button class="btn" onclick="startEditingTask('${data._id}')">Edit</button>
-                    <button class="btn" >Delete</button>
-                    <button class="btn" >Complete</button>
-                </div>
+    <div id="${task._id}_task">
+    <h3 class="name">${task.name}</h3>
+    <p class="description">${task.description}</p>
+    <div class="task_bottom">
+        <div class="time">
+            <p class="due_date">${(new Date(task.due_date.toString())).toUTCString()}</p>
+            <p class="time_left">15 mins left</p>
+        </div>
+        <div class="actions">
+            <button class="btn" onclick="editMode('${task._id}')">Edit</button>
+            <button class="btn" onclick="deleteTask('${task._id}')">Delete</button>
+            ${task.status==="Pending"?`<button class="btn" onclick="complete('${task._id}')">Complete</button>`:"<p>Completed</p>"}
+        </div>
+    </div>
+    </div>
+    
+    `
+}
+
+function displayTaskForm(task){
+    return `
+    
+    <div class="task_form" id="${task._id}_task_form">
+    <label class="task_label" for="task_name">Name:</label>
+    <input class="task_input" type="text" name="name" id="${task._id}_task_name" value="${task.name}">
+    <label class="task_label" for="task_description">Description:</label>
+    <textarea class="task_description" name="description" id="${task._id}_task_description" cols="15" rows="10">${task.description}</textarea>
+
+    <div class="details">
+        <div class="date_container">
+            <label for="task_due_date">Due date:</label>
+            <input type="datetime-local" id="${task._id}_task_due_date" name="date" value="${task.due_date.toString().slice(0,task.due_date.toString().length-1)}">
+        </div>
+        <button class="btn" onclick="edit('${task._id}')">Edit</button>
+        <button class="btn" onclick="cancelEdit('${task._id}')">Cancel</button>
+    </div>
+    </div>
+    
+    `
+}
+
+
+
+function showTasks(){
+    ajax("GET","http://localhost:4500/allTasks",null,null).then(data => {
+        let html=""
+        data.forEach(task => {
+            html+= `
+            
+            <div class="task" id="${task._id}">
+            ${displayTask(task)}
             </div>
     
             `
-        }
-
-    }
-
-    xhttp.open("POST",`http://localhost:4500/editTask/${id}`,true)
-    xhttp.setRequestHeader("Content-Type","application/json")
-    xhttp.send(`{"name":"${document.getElementById(`${id}_task_name`).value}","description":"${document.getElementById(`${id}_task_description`).value}","due_date":"${document.getElementById(`${id}_task_due_date`).value}"}`)
-
+        })
+        document.querySelector(".task_container").innerHTML = html
+    })
 }
 
-function showTasks(){
-    console.log("Welcome to TODO")
+
+function ajax(action,uri,headers,data){
+
+    let response
     let xhttp = new XMLHttpRequest()
-    xhttp.onreadystatechange = function(){
-        let html = ""
-        if(this.readyState == 4 && this.status == 200){
-            JSON.parse(this.response).forEach(task => {
-                html+= `
-                
-                <div class="task" id="${task._id}">
-                    <h3 class="name">${task.name}</h3>
-                    <p class="description">${task.description}</p>
-                    <div class="task_bottom">
-                        <div class="time">
-                            <p class="due_date">${task.due_date}</p>
-                            <p class="time_left">15 mins left</p>
-                        </div>
-                        <div class="actions">
-                            <button class="btn" onclick="startEditingTask('${task._id}')">Edit</button>
-                            <button class="btn" >Delete</button>
-                            <button class="btn" >Complete</button>
-                        </div>
-                    </div>
-                </div>
 
-                `
-            })
-            document.querySelector(".task_container").innerHTML = html
+    return new Promise((resolve,reject)=>{
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                if(this.response) response=resolve(JSON.parse(this.response))
+                else resolve(null)
+            }
         }
-
-    }
-
-    xhttp.open("GET","http://localhost:4500/allTasks",true)
-    xhttp.send()
+        
+        xhttp.open(action,uri,true)
+        if(headers){
+            for(let key in headers){
+                xhttp.setRequestHeader(key,headers[key])
+            }
+        }
+        xhttp.send(data)
+    })
 }
-
 
 showTasks()

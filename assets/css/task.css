@@ -24,7 +24,7 @@ body{
 .task_form{
     display: flex;
     flex-direction: column;
-    width:700px;
+    width:800px;
     margin:0 auto 2rem auto;
 }
 
@@ -48,7 +48,7 @@ body{
     background:transparent;
     color:black;
     border:2px solid black;
-    padding:0.5rem 1rem;
+    padding:0.3rem 1rem;
     font-size:medium;
 }
 
@@ -73,9 +73,9 @@ body{
     display:flex;
     flex-direction: column;
     padding:1rem;
-    width:700px;
+    width:80%;
     border: 1px solid black;
-    margin:0 auto 1rem auto;
+    margin:0 auto 0.5rem auto;
 }
 
 .task_bottom{
@@ -85,12 +85,20 @@ body{
 }
 
 .time{
-    display: flex;
+    display:flex;
+}
+
+.actions{
+    display:flex;
 }
 
 .time p{
     border:1px solid black;
     padding:0.5rem;
     margin-right: 1rem;
+}
+
+.actions *{
+    margin-left: 1rem
 }
 

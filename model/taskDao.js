@@ -25,7 +25,7 @@ function editTask(id,obj){
 }
 
 function deleteTask(id){
-    task.findByIdAndDelete(id)
+    return task.deleteOne({_id:id})
 }
 
 module.exports = {getAllTasks,getOneTask,addTask,editTask,deleteTask}
