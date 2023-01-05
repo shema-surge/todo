@@ -1,23 +1,23 @@
 const user = require('./user')
 
-function getAllusers(){
+function getAllUsers(){
     return user.find()
 }
 
-function getOneuser(id){
-    return user.findById(id)
+function getOneUser(obj){
+    return user.findOne(obj)
 }
 
-function createuser(obj){
+function createUser(obj){
    return user.create(obj)
 }
 
-function edituser(id,obj){
+function editUser(id,obj){
     return user.findByIdAndUpdate(id,obj,{new:true})
 }
 
-function deleteuser(id){
+function deleteUser(id){
     return user.deleteOne({_id:id})
 }
 
-module.exports = {getAllusers,getOneuser,createuser,edituser,deleteuser}
+module.exports = {getAllUsers,getOneUser,createUser,editUser,deleteUser}

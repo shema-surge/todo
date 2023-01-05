@@ -4,6 +4,7 @@ body{
     padding:0;
     margin:0;
     font-family: 'IBM Plex Mono', monospace;
+    font-size: small;
 }
 
 .navbar{
@@ -14,7 +15,7 @@ body{
 }
 
 .navbar a{
-    font-size: medium;
+    font-size:large;
     font-weight: bold;
     color:black;
     margin-left: 6rem;
@@ -24,7 +25,7 @@ body{
 .task_form{
     display: flex;
     flex-direction: column;
-    width:800px;
+    width:70%;
     margin:0 auto 2rem auto;
 }
 
@@ -35,7 +36,6 @@ body{
 .task_input{
     margin-bottom: 1rem;
     padding:10px;
-    font-size: medium;
     border: 1px solid black;
 }
 
@@ -49,7 +49,7 @@ body{
     color:black;
     border:2px solid black;
     padding:0.3rem 1rem;
-    font-size:medium;
+    font-weight: 600;
 }
 
 .btn:hover{
@@ -73,7 +73,7 @@ body{
     display:flex;
     flex-direction: column;
     padding:1rem;
-    width:80%;
+    width:70%;
     border: 1px solid black;
     margin:0 auto 0.5rem auto;
 }
