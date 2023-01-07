@@ -4,27 +4,41 @@ body{
     padding:0;
     margin:0;
     font-family: 'IBM Plex Mono', monospace;
+    font-size: small;
 }
 
 .navbar{
     display:flex;
-    padding:1.5rem 0;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.8rem 0;
     border-bottom:2px solid black;
     margin-bottom:5rem;
 }
 
-.navbar a{
-    font-size: medium;
+.title{
+    font-size:large;
     font-weight: bold;
     color:black;
     margin-left: 6rem;
     text-decoration: none;
 }
 
+.account{
+    display: flex;
+    align-items: center;
+    margin-right: 6rem;
+}
+
+.account p{
+    font-weight:bold;
+    margin-right:2rem
+}
+
 .task_form{
     display: flex;
     flex-direction: column;
-    width:800px;
+    width:70%;
     margin:0 auto 2rem auto;
 }
 
@@ -35,7 +49,6 @@ body{
 .task_input{
     margin-bottom: 1rem;
     padding:10px;
-    font-size: medium;
     border: 1px solid black;
 }
 
@@ -48,8 +61,8 @@ body{
     background:transparent;
     color:black;
     border:2px solid black;
-    padding:0.3rem 1rem;
-    font-size:medium;
+    padding:1rem 1rem;
+    font-weight: 600;
 }
 
 .btn:hover{
@@ -73,7 +86,7 @@ body{
     display:flex;
     flex-direction: column;
     padding:1rem;
-    width:80%;
+    width:70%;
     border: 1px solid black;
     margin:0 auto 0.5rem auto;
 }
