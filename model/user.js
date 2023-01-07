@@ -5,6 +5,7 @@ const userSchema = new Schema({
 
     name:{
         type:String,
+        min:[2,"Too short"],
         required:true
     },
     username:{
@@ -19,7 +20,6 @@ const userSchema = new Schema({
         type:String,
         required:true
     }
-
 })
 
 userSchema.pre('save',async function(next){

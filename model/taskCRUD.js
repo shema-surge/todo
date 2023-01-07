@@ -1,19 +1,11 @@
 const task = require('./task')
 
-function getAllTasks(){
-    return task.find()
+function getAllTasks(obj){
+    return task.find(obj)
 }
 
 function getOneTask(id){
     return task.findById(id)
-}
-
-function getPendingTasks(id){
-    return task.find({status:"Pending"})
-}
-
-function getCompletedTasks(id){
-    return task.find({status:"Completed"})
 }
 
 function addTask(obj){

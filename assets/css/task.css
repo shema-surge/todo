@@ -9,17 +9,30 @@ body{
 
 .navbar{
     display:flex;
-    padding:1.5rem 0;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.8rem 0;
     border-bottom:2px solid black;
     margin-bottom:5rem;
 }
 
-.navbar a{
+.title{
     font-size:large;
     font-weight: bold;
     color:black;
     margin-left: 6rem;
     text-decoration: none;
+}
+
+.account{
+    display: flex;
+    align-items: center;
+    margin-right: 6rem;
+}
+
+.account p{
+    font-weight:bold;
+    margin-right:2rem
 }
 
 .task_form{
@@ -48,7 +61,7 @@ body{
     background:transparent;
     color:black;
     border:2px solid black;
-    padding:0.3rem 1rem;
+    padding:1rem 1rem;
     font-weight: 600;
 }
 

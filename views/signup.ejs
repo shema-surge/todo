@@ -10,7 +10,7 @@
 <body>
     
 <nav class="navbar">
-    <a href="">TODO</a>
+    <a class="title" href="">TODO</a>
 </nav>
 
 <form class="login_form" action="http://localhost:4500/create" method="post">
@@ -24,6 +24,7 @@
     <input class="login_input" type="password" name="password" id="password">
     <input class="login_btn" type="submit" value="Sign up">
     <a href="/" class="signup">login instead?</a>
+    <p class="error" id="error"><%= (err)?err.message:"" %></p>
 </form>
 
 

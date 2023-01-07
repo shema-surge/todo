@@ -4,7 +4,7 @@ function getAllUsers(){
     return user.find()
 }
 
-function getOneUser(obj){
+function getUser(obj){
     return user.findOne(obj)
 }
 
@@ -20,4 +20,4 @@ function deleteUser(id){
     return user.deleteOne({_id:id})
 }
 
-module.exports = {getAllUsers,getOneUser,createUser,editUser,deleteUser}
+module.exports = {getAllUsers,getUser,createUser,editUser,deleteUser}
